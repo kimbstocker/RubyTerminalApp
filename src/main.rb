@@ -7,12 +7,15 @@ case input
     when 1
         quiz = EasyLevelQuiz.new
         quiz.random_question
+        quiz.print_scorecard
     when 2
         quiz = MediumLevelQuiz.new
         quiz.random_question
+       
     when 3
         quiz = HardLevelQuiz.new  
         quiz.random_question 
+       
 end
 
 
