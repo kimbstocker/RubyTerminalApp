@@ -1,13 +1,29 @@
 # Reference list
 # GitHub Link
 [GitHub Repo](https://github.com/kimbstocker/KimStocker_T1A3)
+## Help Guide
+- steps to install the application
+- any dependencies required by the application to operate
+- any system/hardware requirements
 # Software Development Plan
 ## Purpose
 - describe at a high level what the application will do
 - identify the problem it will solve and explain why you are developing it
 ## Scope
-- identify the target audience
-- explain how a member of the target audience will use it
+This application is designed for school age children as well as anyone who love Math and wants to practice solving Arithmetic operations (except division) using their brain instead of a calculator. 
+Users are invited to download and install the application package that include Ruby and Ruby gems installation.
+Users will be offered to challenge themselves with 3 levels of quiz difficulty, they can use the help guide to choose one of the level by entering it on the command line.
+Once a user run the appliction and chose the difficulty level, they will:
+- See the first question of the quiz. 
+- The user will then need to enter their answer.
+- If the user enter anything other than a number, they will be prompted with a message that the answer entered is invalid and they should enter a different answer that contain a number only.
+- If the user enter a valid answer (a number), they will see if their answer is right or wrong as well as the next question of the quiz. They will also see an option to quit (enter q to quit) the program at each displayed question.
+- This process will be repeated for a total of 10 questions.
+- After answering the 10th question, the user will see their score card. 
+- They will also see option to save the score card if they finish all 10 questions ("yes" or "no" options). This option will not be displayed when the user quit in the middle of the quiz. 
+- If the user choose to save the scorecard as a file, (they must enter "yes". If they enter anything other than "yes" or "no", an error message will pop up and ask them to enter either "yes" or "no" only) a file will be created and saved in the "Scorecards" folder and a message with the file location will be displayed to the user.
+- The user will then see options to go to the next level (enter the level number 1 or 2 or 3) or to quit the program (enter q to quit). Any input other than 1,2,3,q will return an error message that tells the user to choose the valid input only.
+- The program continue to run unless the user chose "q" to exit the program.
 ## Features
 describe
 - use of variables and the concept of variable scope
@@ -42,7 +58,3 @@ Once finished their quiz, users can print out their scorecard that list out all 
 -  Your checklists for each feature should have at least 5 items.
   
 
-## Help Guide
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
