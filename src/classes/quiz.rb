@@ -22,6 +22,7 @@ class Quiz
     def run_quiz
         ask_questions
         print_scorecard
+        save_scorecard
     end
 
     def ask_questions
@@ -65,19 +66,35 @@ class Quiz
 
     def print_scorecard
         total_score = 0
+        @scorecard = []
         (0...@user_answers.length).each do |i|
             if @user_answers[i] == @correct_answers[i]
                 score = 1
             else 
                 score = 0
             end
-            puts "Q#{i+1}, #{@questions[i]}\nYour answer:    #{@user_answers[i]}\nCorrect answer: #{@correct_answers[i]}\nYour Score: #{score}"
-            puts
+            row = "Q#{i+1},  #{@questions[i]}           Your answer: #{@user_answers[i]}                Correct answer: #{@correct_answers[i]}                Your Score: #{score}"
+            @scorecard << row
+            puts row
             total_score += score  
         end
         puts "Your total score is #{total_score}"
     end
 
+    def save_scorecard
+        puts "Would you like to save your scorecard?(please enter 'yes' or 'no' only)"
+        input = gets.chomp
+        if input == 'yes'
+            puts "What do you want to name your file?"
+            name = gets.chomp
+            File.open("./scorecard/#{name}.txt", "w+") do |f| 
+                f.puts(@scorecard)
+            end 
+            puts "Your scorecard has been saved and here is the file path ./scorecard/#{name}.txt"
+        else
+            exit
+        end
+    end 
 
 end
 

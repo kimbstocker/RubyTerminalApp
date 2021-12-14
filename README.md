@@ -38,8 +38,6 @@ Once finished their quiz, users can print out their scorecard that list out all 
 ## Control Flow Diagram
 - show the workflow/logic and/or integration of the features in your application for each feature.
 - utilise a recognised format or set of conventions for a control flow diagram, such as UML.
-
-
 ## Software Developement Plan and Implementation
 - outlines how each feature will be implemented and a checklist of tasks for each feature
   ![Trello Board](docs/TrelloHome.png "TrelloBoard")

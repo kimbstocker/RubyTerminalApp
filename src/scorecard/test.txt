@@ -1,0 +1,10 @@
+Q1,  337 + 73 * 4 + 15           Your answer: 467                Correct answer: 644                Your Score: 0
+Q2,  386 - 85 - 3 + 72           Your answer: 78                Correct answer: 370                Your Score: 0
+Q3,  98 + 241 - 7 + 83           Your answer: 768779798                Correct answer: 415                Your Score: 0
+Q4,  49 * 30 + 335 * 6           Your answer: 87879797                Correct answer: 3480                Your Score: 0
+Q5,  69 - 2 - 629 + 33           Your answer: 58787987                Correct answer: -529                Your Score: 0
+Q6,  16 * 867 - 1 * 57           Your answer: 57676                Correct answer: 13815                Your Score: 0
+Q7,  628 - 15 + 8 * 71           Your answer: 548678                Correct answer: 1181                Your Score: 0
+Q8,  44 + 7 * 59 * 876           Your answer: 57876                Correct answer: 361832                Your Score: 0
+Q9,  248 - 7 * 96 - 92           Your answer: 7863487378                Correct answer: -516                Your Score: 0
+Q10,  67 - 5 * 11 - 856           Your answer: 67687685                Correct answer: -844                Your Score: 0
