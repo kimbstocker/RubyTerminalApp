@@ -16,6 +16,9 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
+    terminal-table (3.0.2)
+      unicode-display_width (>= 1.1.1, < 3)
+    unicode-display_width (2.1.0)
 
 PLATFORMS
   x86_64-darwin-21
@@ -23,6 +26,7 @@ PLATFORMS
 DEPENDENCIES
   colorize
   rspec (~> 3.10)
+  terminal-table
 
 BUNDLED WITH
    2.2.32

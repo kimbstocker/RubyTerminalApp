@@ -1,5 +1,5 @@
 require 'colorize'
-
+require 'terminal-table'
 
 $operators = ["+", "-", "*"]
 $single_digit_numbers = (1..9).to_a
@@ -73,12 +73,16 @@ class Quiz
             else 
                 score = 0
             end
-            row = "Q#{i+1},  #{@questions[i]}           Your answer: #{@user_answers[i]}                Correct answer: #{@correct_answers[i]}                Your Score: #{score}"
-            @scorecard << row
-            puts row
+            row_array = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", "#{@user_answers[i]}", "#{score}"]
+            @scorecard << row_array
             total_score += score  
         end
-        puts "Your total score is #{total_score}"
+        @scorecard << ["", "", "", "Total Score", total_score]
+        @table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @scorecard
+        @table.align_column(2, :right)
+        @table.align_column(3, :right)
+        @table.align_column(4, :right)
+        puts @table
     end
 
     def save_scorecard
@@ -86,11 +90,11 @@ class Quiz
         input = gets.chomp
         if input == 'yes'
             puts "What do you want to name your file?"
-            name = gets.chomp
-            File.open("./scorecard/#{name}.txt", "w+") do |f| 
-                f.puts(@scorecard)
+            file_name = gets.chomp
+            File.open("./scorecard/#{file_name}.txt", "w+") do |f| 
+                f.puts(@table)
             end 
-            puts "Your scorecard has been saved and here is the file path ./scorecard/#{name}.txt"
+            puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name}.txt"
         else
             exit
         end
