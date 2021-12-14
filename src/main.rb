@@ -5,16 +5,18 @@ puts "Choose level 1, 2 or 3"
 input = gets.chomp.to_i
 case input
     when 1
-        quiz = EasyLevelQuiz.new
+        quiz = Quiz.new(1)
         quiz.random_question
         quiz.print_scorecard
     when 2
-        quiz = MediumLevelQuiz.new
+        quiz = Quiz.new(2)
         quiz.random_question
+        quiz.print_scorecard
        
     when 3
-        quiz = HardLevelQuiz.new  
-        quiz.random_question 
+        quiz = Quiz.new(3)
+        quiz.random_question
+        quiz.print_scorecard
        
 end
 
