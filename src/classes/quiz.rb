@@ -68,15 +68,15 @@ class Quiz
         total_score = 0
         @scorecard = []
         (0...@user_answers.length).each do |i|
-            user_answer_colorized = ""
+            # user_answer_colorized = ""
             if @user_answers[i] == @correct_answers[i]
                 score = 1
-                user_answer_colorized = "#{@user_answers[i]}".green
+                # user_answer_colorized = "#{@user_answers[i]}".green
             else 
                 score = 0
-                user_answer_colorized = "#{@user_answers[i]}".red
+                # user_answer_colorized = "#{@user_answers[i]}".red
             end
-            row_array = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
+            row_array = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", "#{@user_answers[i]}", "#{score}"]
             @scorecard << row_array
             total_score += score  
         end
