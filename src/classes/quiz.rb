@@ -1,3 +1,5 @@
+require 'colorize'
+
 
 $operators = ["+", "-", "*"]
 $single_digit_numbers = (1..9).to_a
@@ -10,17 +12,20 @@ class Quiz
     attr_accessor :user_answers
 
     def initialize(level)
-    # def initialize
         @level = level
+        @questions = []
         @correct_answers = []
         @user_answers = []
     end
 
-    def random_question
-        
-           
-        i = 0
-        while i < 10 
+
+    def run_quiz
+        ask_questions
+        print_scorecard
+    end
+
+    def ask_questions
+        10.times do
             single_digit_num_one = $single_digit_numbers.sample
             single_digit_num_two = $single_digit_numbers.sample
             double_digit_num_one = $double_digit_numbers.sample
@@ -43,33 +48,32 @@ class Quiz
             end
 
             answer = eval(question)
+            @questions << question
             @correct_answers << answer
             puts question
             input = gets.chomp.to_i
             if input == answer
-                puts "Right"
+                puts "Right".green
             else
-                puts "Wrong"
+                puts "Wrong".red
             end
             @user_answers << input
-            i += 1        
         end
        
     end
 
 
     def print_scorecard
-        i = 0
         total_score = 0
-        while i < 10
+        (0...@user_answers.length).each do |i|
             if @user_answers[i] == @correct_answers[i]
                 score = 1
             else 
                 score = 0
             end
-            puts "Your answer   #{@user_answers[i]}     Correct answer #{@correct_answers[i]}       Your Score   #{score}"
+            puts "Q#{i+1}, #{@questions[i]}\nYour answer:    #{@user_answers[i]}\nCorrect answer: #{@correct_answers[i]}\nYour Score: #{score}"
+            puts
             total_score += score  
-            i += 1
         end
         puts "Your total score is #{total_score}"
     end
@@ -77,79 +81,3 @@ class Quiz
 
 end
 
-
-# class MediumLevelQuiz
-
-#     attr_accessor :correct_answers
-#     attr_accessor :user_answers
-
-#     # def initialize(level)
-#     def initialize
-#         @correct_answers = []
-#         @user_answers = []
-#     end
-
-#     def random_question
-        
-#             i = 1
-#             while i <= 10 
-#                 first_num = $single_digit_numbers.sample
-#                 second_num = $double_digit_numbers.sample
-#                 third_num = $double_digit_numbers.sample
-#                 first_operator = $operators.sample
-#                 second_operator = $operators.sample
-#                 question = "Q#{i}) #{first_num} #{first_operator} #{second_num} #{second_operator} #{third_num}"
-#                 answer = eval("#{first_num} #{first_operator} #{second_num} #{second_operator} #{third_num}")
-#                 @correct_answers << answer
-#                 puts question
-#                 input = gets.chomp.to_i
-#                     if input == answer
-#                         puts "Right"
-#                     else
-#                         puts "Wrong"
-#                     end
-#                 @user_answers << input
-#                 i += 1
-#             end
-        
-#     end
-# end
-
-# class HardLevelQuiz
-
-#     attr_accessor :correct_answers
-#     attr_accessor :user_answers
-
-#     # def initialize(level)
-#     def initialize
-#         @correct_answers = []
-#         @user_answers = []
-#     end
-
-#     def random_question
-        
-#             i = 1
-#             while i <= 10 
-#                 first_num = $single_digit_numbers.sample
-#                 second_num = $double_digit_numbers.sample
-#                 third_num = $double_digit_numbers.sample
-#                 fourth_num = $triple_digit_numbers.sample
-#                 first_operator = $operators.sample
-#                 second_operator = $operators.sample
-#                 third_operator = $operators.sample
-#                 question = "Q#{i}) #{first_num} #{first_operator} #{second_num} #{second_operator} #{third_num} #{third_operator} #{fourth_num}"
-#                 answer = eval("#{first_num} #{first_operator} #{second_num} #{second_operator} #{third_num} #{third_operator} #{fourth_num}")
-#                 @correct_answers << answer
-#                 puts question
-#                 input = gets.chomp.to_i
-#                     if input == answer
-#                         puts "Right"
-#                     else
-#                         puts "Wrong"
-#                     end
-#                 @user_answers << input
-#                 i += 1
-#             end
-        
-#     end
-# end
