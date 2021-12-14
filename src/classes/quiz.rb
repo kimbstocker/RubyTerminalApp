@@ -94,10 +94,10 @@ class Quiz
         if input == 'yes'
             puts "What do you want to name your file?"
             file_name = gets.chomp
-            File.open("./scorecard/#{file_name}.txt", "w+") do |f| 
+            File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
                 f.puts(@table)
             end 
-            puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name}.txt"
+            puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
         else
             exit
         end
