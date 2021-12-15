@@ -7,19 +7,22 @@ $operators = ["+", "-", "*"]
 $single_digit_numbers = (1..9).to_a
 $double_digit_numbers = (10..99).to_a
 $triple_digit_numbers = (100..999).to_a
+$leader_board = {}
 
 class Quiz
 
     attr_accessor :correct_answers
     attr_accessor :user_answers
+    attr_accessor :total_score
+    attr_accessor :username
 
     def initialize(username, level)
-        @username = username
+        @@username = username
         @level = level
-        @@user_score = {}
         @questions = []
         @correct_answers = []
         @user_answers = []
+        @@total_score = 0
     end
 
 
@@ -71,7 +74,6 @@ class Quiz
 
 
     def create_scorecard
-        @total_score = 0
         @score_to_save = []
         @score_to_display = []
         (0...@user_answers.length).each do |i|
@@ -87,36 +89,38 @@ class Quiz
             row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
             @score_to_save << row_to_save
             @score_to_display << row_to_display
-            @total_score += score  
+            @@total_score += score  
         end
     end
 
     def display_scorecard
-        @score_to_display << ["", "", "", "Total Score", @total_score]
+        @score_to_display << ["", "", "", "Total Score", @@total_score]
         @display_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_display
         @display_table.align_column(2, :right)
         @display_table.align_column(3, :right)
         @display_table.align_column(4, :right)
         puts @display_table
+        if @@total_score == 10
+            nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Superstar"]
+            random_nick_name = nick_name.shuffle
+            puts "#{@@username}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
+        end
+        
     end
 
     def update_leaderboard
-        @@user_score[@username] = @total_score
-        if @total_score == 10
-            nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Welldone"].shuffle
-            puts "#{nick_name[0]}!, you got a perfect score!"
+        $leader_board[@@username] = @@total_score
+        if [@@username, @@total_score] == $leader_board.max_by {|k, v| v}
+            puts "Congratulations #{@@username}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
-        if @total_score == @@user_score.max_by {|k, v| v}
-            puts "Congratulations #{@username}! You are currently on top of the leaderboard! Great work!"     
-        end
-        File.open("./scorecard/leaderboard.txt", "w+") do |f| 
-            f.puts(@@user_score)
+        File.open("./leaderboard/leaderboard.txt", "w+") do |f| 
+            f.puts($leader_board)
         end 
+        puts $leader_board
     end
-
-
+    
     def save_scorecard
-        @score_to_save << ["", "", "", "Total Score", @total_score]
+        @score_to_save << ["", "", "", "Total Score", @@total_score]
         @save_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_save
         @save_table.align_column(2, :right)
         @save_table.align_column(3, :right)
@@ -126,12 +130,17 @@ class Quiz
             input = gets.chomp
             case input 
                 when 'yes'
-                puts "What do you want to name your file?"
-                file_name = gets.chomp
-                File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
-                    f.puts(@save_table)
-                end 
-                puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
+                    puts "What do you want to name your file?"
+                    file_name = gets.chomp
+                    File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
+                        f.puts(@save_table)
+                    end 
+                    puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
+                    puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)"
+                    continue = gets.chomp
+                    if continue == 'no'
+                        exit
+                    end
                 when 'no'
                     return true
                 when 'q'
@@ -147,4 +156,7 @@ class Quiz
     end 
 
 end
+
+
+
 
