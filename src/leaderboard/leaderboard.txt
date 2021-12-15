@@ -1,1 +1,1 @@
-{"Kim"=>1, "Hal"=>3, "calculator"=>10}
+{"Kim"=>0}
