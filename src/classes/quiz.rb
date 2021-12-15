@@ -1,5 +1,7 @@
 require 'colorize'
 require 'terminal-table'
+require_relative './error-handling.rb'
+
 
 $operators = ["+", "-", "*"]
 $single_digit_numbers = (1..9).to_a
@@ -11,8 +13,10 @@ class Quiz
     attr_accessor :correct_answers
     attr_accessor :user_answers
 
-    def initialize(level)
+    def initialize(username, level)
+        @username = username
         @level = level
+        @@user_score = {}
         @questions = []
         @correct_answers = []
         @user_answers = []
@@ -23,6 +27,7 @@ class Quiz
         ask_questions
         create_scorecard
         display_scorecard
+        update_leaderboard
         save_scorecard
     end
 
@@ -79,12 +84,10 @@ class Quiz
                 user_answer_colorized = "#{@user_answers[i]}".red
             end
             row_to_save = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", "#{@user_answers[i]}", "#{score}"]
-            # row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
             row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
             @score_to_save << row_to_save
             @score_to_display << row_to_display
             @total_score += score  
-            
         end
     end
 
@@ -97,6 +100,20 @@ class Quiz
         puts @display_table
     end
 
+    def update_leaderboard
+        @@user_score[@username] = @total_score
+        if @total_score == 10
+            nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Welldone"].shuffle
+            puts "#{nick_name[0]}!, you got a perfect score!"
+        end
+        if @total_score == @@user_score.max_by {|k, v| v}
+            puts "Congratulations #{@username}! You are currently on top of the leaderboard! Great work!"     
+        end
+        File.open("./scorecard/leaderboard.txt", "w+") do |f| 
+            f.puts(@@user_score)
+        end 
+    end
+
 
     def save_scorecard
         @score_to_save << ["", "", "", "Total Score", @total_score]
@@ -104,17 +121,28 @@ class Quiz
         @save_table.align_column(2, :right)
         @save_table.align_column(3, :right)
         @save_table.align_column(4, :right)
-        puts "Would you like to save your scorecard?(please enter 'yes' or 'no' only)"
-        input = gets.chomp
-        if input == 'yes'
-            puts "What do you want to name your file?"
-            file_name = gets.chomp
-            File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
-                f.puts(@save_table)
-            end 
-            puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
-        else
-            exit
+        begin
+            puts "Would you like to save your scorecard?(Please enter 'yes' to save file, 'no' to start another quiz, or 'q' to quit.)"
+            input = gets.chomp
+            case input 
+                when 'yes'
+                puts "What do you want to name your file?"
+                file_name = gets.chomp
+                File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
+                    f.puts(@save_table)
+                end 
+                puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
+                when 'no'
+                    return true
+                when 'q'
+                    exit
+                else
+                    raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***")
+
+            end
+        rescue ValidationError => e
+            puts e.message 
+            retry 
         end
     end 
 

@@ -9,3 +9,7 @@ gem "colorize"
 gem "rspec", "~> 3.10"
 
 gem "terminal-table"
+
+gem 'pry-byebug', '~> 3.4'
+
+gem 'brakeman', '~> 3.3', '>= 3.3.2'
