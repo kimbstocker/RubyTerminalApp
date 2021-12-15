@@ -36,14 +36,14 @@ class Quiz
             second_operator = $operators.sample
             third_operator = $operators.sample
             case @level
-                when 1
+                when "1"
                     random_numbers = [single_digit_num_one, single_digit_num_two, double_digit_num_one].shuffle
                     question = "#{random_numbers[0]} #{first_operator} #{random_numbers[1]} #{second_operator} #{random_numbers[2]}"
                     
-                when 2
+                when "2"
                     random_numbers = [single_digit_num_one, double_digit_num_one, double_digit_num_two].shuffle
                     question = "#{random_numbers[0]} #{first_operator} #{random_numbers[1]} #{second_operator} #{random_numbers[2]}"
-                when 3
+                when "3"
                     random_numbers = [single_digit_num_one, double_digit_num_one, double_digit_num_two, triple_digit_num].shuffle
                     question = "#{random_numbers[0]} #{first_operator} #{random_numbers[1]} #{second_operator} #{random_numbers[2]} #{third_operator} #{random_numbers[3]}"
             end
