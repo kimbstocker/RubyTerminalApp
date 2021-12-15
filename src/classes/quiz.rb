@@ -21,7 +21,8 @@ class Quiz
 
     def run_quiz
         ask_questions
-        print_scorecard
+        create_scorecard
+        display_scorecard
         save_scorecard
     end
 
@@ -64,38 +65,52 @@ class Quiz
     end
 
 
-    def print_scorecard
-        total_score = 0
-        @scorecard = []
+    def create_scorecard
+        @total_score = 0
+        @score_to_save = []
+        @score_to_display = []
         (0...@user_answers.length).each do |i|
-            # user_answer_colorized = ""
+            user_answer_colorized = ""
             if @user_answers[i] == @correct_answers[i]
                 score = 1
-                # user_answer_colorized = "#{@user_answers[i]}".green
+                user_answer_colorized = "#{@user_answers[i]}".green
             else 
                 score = 0
-                # user_answer_colorized = "#{@user_answers[i]}".red
+                user_answer_colorized = "#{@user_answers[i]}".red
             end
-            row_array = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", "#{@user_answers[i]}", "#{score}"]
-            @scorecard << row_array
-            total_score += score  
+            row_to_save = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", "#{@user_answers[i]}", "#{score}"]
+            # row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
+            row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
+            @score_to_save << row_to_save
+            @score_to_display << row_to_display
+            @total_score += score  
+            
         end
-        @scorecard << ["", "", "", "Total Score", total_score]
-        @table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @scorecard
-        @table.align_column(2, :right)
-        @table.align_column(3, :right)
-        @table.align_column(4, :right)
-        puts @table
     end
 
+    def display_scorecard
+        @score_to_display << ["", "", "", "Total Score", @total_score]
+        @display_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_display
+        @display_table.align_column(2, :right)
+        @display_table.align_column(3, :right)
+        @display_table.align_column(4, :right)
+        puts @display_table
+    end
+
+
     def save_scorecard
+        @score_to_save << ["", "", "", "Total Score", @total_score]
+        @save_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_save
+        @save_table.align_column(2, :right)
+        @save_table.align_column(3, :right)
+        @save_table.align_column(4, :right)
         puts "Would you like to save your scorecard?(please enter 'yes' or 'no' only)"
         input = gets.chomp
         if input == 'yes'
             puts "What do you want to name your file?"
             file_name = gets.chomp
             File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
-                f.puts(@table)
+                f.puts(@save_table)
             end 
             puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
         else
