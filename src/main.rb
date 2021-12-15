@@ -1,5 +1,58 @@
 require 'colorize'
 require_relative './classes/quiz.rb'
+require_relative './classes/error-handling.rb'
+
+
+begin
+    puts "Please enter 1 for easy, 2 for medium, 3 for hard level, q to quit!"
+    user_choice = gets.chomp
+    if user_choice == "q"
+            puts "Thank you and goodbye!"
+            exit
+    elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
+            level_option = user_choice.to_i
+            quiz = Quiz.new(level_option)
+            quiz.run_quiz
+    else
+        raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
+    end
+
+rescue ValidationError => e
+            puts e.message 
+            retry 
+
+end
+
+
+
+# def choose_level(question)
+#     puts question
+#     input = gets.chomp
+#     answer_options.each do |answer|
+
+
+#     if input != "1" && input != "2" && input != "3" && "q")
+#         raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
+#     end
+#     return input  
+# end
+
+#     begin
+#         answer = choose_level("Please enter 1 for easy, 2 for medium, 3 for hard level, q to quit!")
+#     rescue ValidationError => e
+#         puts e.message 
+#         retry 
+#     end
+    
+    
+#     if answer == "q"
+#         puts "Thank you and goodbye!"
+#         exit
+#     else
+        
+#     end
+
+
 
 # if ARGV.length > 0 
 #     flag, *rest = ARGV 
@@ -19,8 +72,5 @@ require_relative './classes/quiz.rb'
 #     end
 # end  
 
-puts "Choose level 1, 2 or 3"
-input = gets.chomp.to_i
-quiz = Quiz.new(input)
-quiz.run_quiz
+
 
