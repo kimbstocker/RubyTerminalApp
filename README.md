@@ -6,11 +6,18 @@ This application require Ruby version 3.0.3 to run. To check if your computer ha
 ```
 ruby --version
 ```
-If you do not have Ruby 3.0.3 version, run this line '$ brew install ruby' on your terminal to install the latest version of Ruby.
-Visit https://www.ruby-lang.org/en/documentation/installation/ for more info on how to install Ruby on your device
+If you do not have Ruby 3.0.3 version, run the below line on your terminal to install the latest version of Ruby.
+```
+$ brew install ruby
+``` 
+Visit https://www.ruby-lang.org/en/documentation/installation/ for more info on how to install Ruby on your device.
+
 To have the best experience with this App, please also install Ruby Gems 'colorize' and 'terminal-table'
+
 You could run a script file below to automatically install all Gems and dependencies. 
+
 Navigate to the route folder of the application, folder name "KimStocker_T1A3", in your terminal puts the below command to check the script
+
 ```
 cat src/script/install-dependencies.sh
 ```
@@ -30,11 +37,11 @@ For help menu, in 'KimStocker_T1A3/src' folder run
 ```
 ruby main.rb -help
 ```
-The programm requires you to enter your username and Quiz difficulty level (1,2 or 3) before you can start answering any questions. A shortcut to start the Quiz is to use the below script and command line arguments. Kindly change (username to your username, level to 1, 2 or 3 only)
+The programm requires you to enter your username and Quiz difficulty level (1,2 or 3) before you can start answering any questions. A shortcut to start the Quiz is to use the below script and command line arguments. 
+Kindly change (username to your username, level to 1, 2 or 3 only)
 ```
 sh src/script/start-quiz.sh username level
 ```
-
 # Software Development Plan
 ## Purpose
 In recent years, devices such as computers, phones, calculators etc. have done extremely well at taking over the role of processing and solving mathematical problems for humans. However, learning and understanding math is still evidently an important skill for our everyday life. Mathematics, particularly mental arithmetic operations calculations are also known to help increase the human’s brain capacity. Daily brain exercises such as learning a new language, playing Sudoku, playing Chess etc. are also proven to reduce the risk of having alzheimer's disease. This Math Quiz App is developed with the hope to help engaging kids as well as adults in practicing and challenging themselves at mental arithmetic operations (except division). And as a result, improving their intelligence and brain's capacity. 
@@ -47,13 +54,14 @@ Once a user run the appliction and chose the difficulty level, they will:
 
 - See the first question of the quiz. 
 - The user will then need to enter their answer.
-- If the user enter anything other than a number, they will be prompted with a message that the answer entered is invalid and they should enter a different answer that contain a number only.
-- If the user enter a valid answer (a number), they will see if their answer is right or wrong as well as the next question of the quiz. They will also see an option to quit (enter q to quit) the program at each displayed question.
+- Once answer is entered, the user will see if their answer is right or wrong as well as the next question of the quiz. 
 - This process will be repeated for a total of 10 questions.
 - After answering the 10th question, the user will see their score card. 
+- If the user hit the perfect score 10/10, they will be praised with a message.
+- If the user is on top of the leaderboard, they will also be notified with a message. All user scores are stored in the program even it the user exit the program and reentered. 
 - They will also see option to save the score card if they finish all 10 questions ("yes" or "no" options). This option will not be displayed when the user quit in the middle of the quiz. 
-- If the user choose to save the scorecard as a file, (they must enter "yes". If they enter anything other than "yes" or "no", an error message will pop up and ask them to enter either "yes" or "no" only) a file will be created and saved in the "Scorecards" folder and a message with the file location will be displayed to the user.
-- The user will then see options to go to the next level (enter the level number 1 or 2 or 3) or to quit the program (enter q to quit). Any input other than 1,2,3,q will return an error message that tells the user to choose the valid input only.
+- If the user choose to save the scorecard as a file, (they must enter "yes". If they enter anything other than "yes" or "no" or "q" to quit, an error message will pop up and ask them to enter either "yes", "no" or "q" only) a file will be created and saved in the "scorecards" folder and a message with the file location will be displayed to the user.
+- The user will then see options to replay the game or to quit the program. 
 - The program continue to run unless the user chose "q" to exit the program.
 ## Features
 ### Feature 1: The Quiz

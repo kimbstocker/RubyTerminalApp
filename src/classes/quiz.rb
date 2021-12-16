@@ -63,13 +63,15 @@ class Quiz
             @questions << question
             @correct_answers << answer
             puts question
-            input = gets.chomp.to_i
-            if input == answer
+            input = gets.chomp
+            if input == 'q'
+                exit_message
+            elsif input.to_i == answer
                 puts "Right".green
             else
                 puts "Wrong".red
             end
-            @user_answers << input
+            @user_answers << input.to_i
         end
        
     end
