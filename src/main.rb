@@ -44,8 +44,7 @@ while true
             
             quiz = Quiz.new(username, user_choice, scoreboard)
             quiz.run_quiz
-            quiz.save_scorecard
-
+            
             scoreboard.update_score(username, quiz.total_score)
             scoreboard.write_file
         else

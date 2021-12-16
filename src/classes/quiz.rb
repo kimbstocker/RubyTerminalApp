@@ -62,6 +62,7 @@ class Quiz
         ask_questions
         create_scorecard
         display_scorecard
+        save_scorecard
     end
 
     def ask_questions
@@ -127,11 +128,11 @@ class Quiz
 
     def display_scorecard
         @score_to_display << ["", "", "", "Total Score", @total_score]
-        @display_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_display
-        @display_table.align_column(2, :right)
-        @display_table.align_column(3, :right)
-        @display_table.align_column(4, :right)
-        puts @display_table
+        display_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_display
+        display_table.align_column(2, :right)
+        display_table.align_column(3, :right)
+        display_table.align_column(4, :right)
+        puts display_table
         if @total_score == 10
             nick_name = ["genius", "mastermind", "math master", "mad math", "you're gifted", "superstar"]
             random_nick_name = nick_name.shuffle
