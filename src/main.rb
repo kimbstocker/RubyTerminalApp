@@ -41,8 +41,8 @@ while true
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
                 quiz = Quiz.new(username, user_choice)
                 quiz.run_quiz
-                new_high_score = UpdateScoreboard.new
-                new_high_score.update_score
+
+                quiz.update_score
                 quiz.save_scorecard
         else
             raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")

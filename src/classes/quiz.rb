@@ -10,8 +10,6 @@ $single_digit_numbers = (1..9).to_a
 $double_digit_numbers = (10..99).to_a
 $triple_digit_numbers = (100..999).to_a
 
-file = File.read('scoreboard/scoreboard.json')
-$score_board = JSON.parse(file)
 
 class Quiz
 
@@ -21,12 +19,14 @@ class Quiz
     attr_accessor :username
 
     def initialize(username, level)
-        @@username = username
+        @username = username
         @level = level
         @questions = []
         @correct_answers = []
         @user_answers = []
-        @@total_score = 0
+        @total_score = 0
+        file = File.read('../scoreboard/scoreboard.json')
+        $score_board = JSON.parse(file)
     end
 
 
@@ -104,13 +104,13 @@ class Quiz
         @display_table.align_column(3, :right)
         @display_table.align_column(4, :right)
         puts @display_table
-        if @@total_score == 10
+        if @total_score == 10
             nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Superstar"]
             random_nick_name = nick_name.shuffle
-            puts "#{@@username.capitalize}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
+            puts "#{@username.capitalize}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
         end
-        if [@@username, @@total_score] == $score_board.max_by {|k, v| v}
-            puts "Congratulations #{@@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
+        if [@username, @total_score] == $score_board.max_by {|k, v| v}
+            puts "Congratulations #{@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
     end
 
@@ -135,15 +135,11 @@ class Quiz
                     puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)"
                     continue = gets.chomp
                     if continue == 'no'
-                        # puts 'Thank you! See you another time!'
-                        # exit
                     exit_message
                     end
                 when 'no'
                     return true
                 when 'q'
-                    # puts 'Thank you! See you tomorrow!'
-                    # exit
                     exit_message
                 else
                     raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***")
@@ -153,26 +149,17 @@ class Quiz
             puts e.message 
             retry 
         end
-    end 
-
-end
-
-
-class UpdateScoreboard < Quiz
-
-    def initialize
     end
 
     def update_score
-        # update scoreboard if userame is new or username total score is higher than history scores.
-        if $score_board[@@username] == nil || $score_board[@@username] < @@total_score
-            $score_board[@@username] = @@total_score
+        # update scoreboard if username is new or username total score is higher than history scores.
+        if $score_board[@username] == nil || $score_board[@username] < @total_score
+            $score_board[@username] = @total_score
         end
         File.write("./scoreboard/scoreboard.json", JSON.dump($score_board))
     end
 
 end
-
 
 
 
