@@ -39,11 +39,15 @@ while true
         if user_choice == "q"
             exit_message
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
-                quiz = Quiz.new(username, user_choice)
-                quiz.run_quiz
+            scoreboard = Scoreboard.new("scoreboard/scoreboard.json")
+            scoreboard.read_file
+            
+            quiz = Quiz.new(username, user_choice, scoreboard)
+            quiz.run_quiz
+            quiz.save_scorecard
 
-                quiz.update_score
-                quiz.save_scorecard
+            scoreboard.update_score(username, quiz.total_score)
+            scoreboard.write_file
         else
             raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
         end

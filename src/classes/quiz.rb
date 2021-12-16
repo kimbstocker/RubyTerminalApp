@@ -5,11 +5,41 @@ require_relative './error-handling.rb'
 require_relative '../methods.rb'
 
 
-$operators = ["+", "-", "*"]
-$single_digit_numbers = (1..9).to_a
-$double_digit_numbers = (10..99).to_a
-$triple_digit_numbers = (100..999).to_a
+OPERATORS = ["+", "-", "*"]
+SINGLE_DIGIT_NUMBERS = (1..9).to_a
+DOUBLE_DIGIT_NUMBERS = (10..99).to_a
+TRIPLE_DIGIT_NUMBERS = (100..999).to_a
 
+class Scoreboard
+
+    attr_accessor :scores
+
+    def initialize(filename)
+        @filename = filename
+        @scores = {}
+    end
+    
+    def read_file
+        file = File.read(@filename)
+        @scores = JSON.parse(file)
+    end
+
+    def max_score
+        top = @scores.max_by {|k, v| v}
+        top[1]
+    end
+
+    def update_score(username, score)
+        # update scoreboard if username is new or username total score is higher than history scores.
+        if @scores[username] == nil || @scores[username] < score
+            @scores[username] = score
+        end
+    end
+
+    def write_file
+        File.write(@filename, JSON.dump(@scores))
+    end
+end
 
 class Quiz
 
@@ -18,17 +48,15 @@ class Quiz
     attr_accessor :total_score
     attr_accessor :username
 
-    def initialize(username, level)
+    def initialize(username, level, scoreboard)
         @username = username
         @level = level
         @questions = []
         @correct_answers = []
         @user_answers = []
         @total_score = 0
-        file = File.read('../scoreboard/scoreboard.json')
-        $score_board = JSON.parse(file)
+        @scoreboard = scoreboard
     end
-
 
     def run_quiz
         ask_questions
@@ -38,14 +66,14 @@ class Quiz
 
     def ask_questions
         10.times do
-            single_digit_num_one = $single_digit_numbers.sample
-            single_digit_num_two = $single_digit_numbers.sample
-            double_digit_num_one = $double_digit_numbers.sample
-            double_digit_num_two = $double_digit_numbers.sample
-            triple_digit_num = $triple_digit_numbers.sample
-            first_operator = $operators.sample
-            second_operator = $operators.sample
-            third_operator = $operators.sample
+            single_digit_num_one = SINGLE_DIGIT_NUMBERS.sample
+            single_digit_num_two = SINGLE_DIGIT_NUMBERS.sample
+            double_digit_num_one = DOUBLE_DIGIT_NUMBERS.sample
+            double_digit_num_two = DOUBLE_DIGIT_NUMBERS.sample
+            triple_digit_num = TRIPLE_DIGIT_NUMBERS.sample
+            first_operator = OPERATORS.sample
+            second_operator = OPERATORS.sample
+            third_operator = OPERATORS.sample
             case @level
                 when "1"
                     random_numbers = [single_digit_num_one, single_digit_num_two, double_digit_num_one].shuffle
@@ -93,36 +121,36 @@ class Quiz
             row_to_display = ["#{i+1}", "#{@questions[i]}", "#{@correct_answers[i]}", user_answer_colorized, "#{score}"]
             @score_to_save << row_to_save
             @score_to_display << row_to_display
-            @@total_score += score  
+            @total_score += score  
         end
     end
 
     def display_scorecard
-        @score_to_display << ["", "", "", "Total Score", @@total_score]
+        @score_to_display << ["", "", "", "Total Score", @total_score]
         @display_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_display
         @display_table.align_column(2, :right)
         @display_table.align_column(3, :right)
         @display_table.align_column(4, :right)
         puts @display_table
         if @total_score == 10
-            nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Superstar"]
+            nick_name = ["genius", "mastermind", "math master", "mad math", "you're gifted", "superstar"]
             random_nick_name = nick_name.shuffle
-            puts "#{@username.capitalize}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
+            puts "#{@username.capitalize}, #{random_nick_name[0]}! You got a perfect score!".white.on_blue.blink
         end
-        if [@username, @total_score] == $score_board.max_by {|k, v| v}
+        if @total_score >= @scoreboard.max_score
             puts "Congratulations #{@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
     end
 
     
     def save_scorecard
-        @score_to_save << ["", "", "", "Total Score", @@total_score]
+        @score_to_save << ["", "", "", "Total Score", @total_score]
         @save_table = Terminal::Table.new :title => "Scorecard", :headings => ['No.','Question', 'Correct Answer','Your Answer', 'Your Score'], :rows => @score_to_save
         @save_table.align_column(2, :right)
         @save_table.align_column(3, :right)
         @save_table.align_column(4, :right)
         begin
-            puts "Would you like to save your scorecard?(Please enter 'yes' to save file, 'no' to start another quiz, or 'q' to quit.)"
+            puts "Would you like to save your scorecard? (Please enter 'yes' to save file, 'no' to start another quiz, or 'q' to quit.)"
             input = gets.chomp
             case input 
                 when 'yes'
@@ -149,14 +177,6 @@ class Quiz
             puts e.message 
             retry 
         end
-    end
-
-    def update_score
-        # update scoreboard if username is new or username total score is higher than history scores.
-        if $score_board[@username] == nil || $score_board[@username] < @total_score
-            $score_board[@username] = @total_score
-        end
-        File.write("./scoreboard/scoreboard.json", JSON.dump($score_board))
     end
 
 end
