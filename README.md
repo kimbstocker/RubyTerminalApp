@@ -50,17 +50,17 @@ This application is designed for school age children as well as anyone who love 
 Users are invited to download and install the application package that include Ruby and Ruby gems installation.
 There are 3 difficulty levels ranking from easy, medium to hard. Users will need to answer 10 questions and they will see their score for each question as well as their overall score at the end of the Quiz. Users can use the help guide to choose one of the level by entering it on the command line or follow the prompt if they run the app manually.
 
-Once a user run the appliction and chose the difficulty level, they will:
+**User Interface & User Experience:**
 
 - See the first question of the quiz. 
 - The user will then need to enter their answer.
 - Once answer is entered, the user will see if their answer is right or wrong as well as the next question of the quiz. 
-- This process will be repeated for a total of 10 questions.
+- This process will be repeated for a total of 10 questions. (User have the option to Quit at any time of the Quiz by simply enter 'q')
 - After answering the 10th question, the user will see their score card. 
-- If the user hit the perfect score 10/10, they will be praised with a message.
-- If the user is on top of the leaderboard, they will also be notified with a message. All user scores are stored in the program even it the user exit the program and reentered. 
-- They will also see option to save the score card if they finish all 10 questions ("yes" or "no" options). This option will not be displayed when the user quit in the middle of the quiz. 
-- If the user choose to save the scorecard as a file, (they must enter "yes". If they enter anything other than "yes" or "no" or "q" to quit, an error message will pop up and ask them to enter either "yes", "no" or "q" only) a file will be created and saved in the "scorecards" folder and a message with the file location will be displayed to the user.
+- If the user hit the perfect score 10/10, they will be praised with a message. This will encourage users to get a perfect score and come back to the app to keep playing the Quiz.
+- If the user is on top of the leaderboard, they will also be notified with a message. All user scores are stored in the program even it the user exit the program and reentered. This is also a good incentive for user to come back and be competitive to either beat their own score or other user score.
+- They will also see an option to save their scorecard if they finish all 10 questions.
+- If the user choose to save the scorecard as a file, they will be invited to name the file. A file with the name input by user and UTC date, time details will be created and saved in the "scorecards" folder and a message with the file location will be displayed to the user.
 - The user will then see options to replay the game or to quit the program. 
 - The program continue to run unless the user chose "q" to exit the program.
 ## Features
