@@ -9,8 +9,8 @@ if ARGV.length > 0
     ARGV.clear
     case flag
     when '-help'
-        puts "-r username level:    to start the Quiz (username: your username, level: 1, 2 or 3 only)"
-        puts "-info:                to view history of the app and developer information"
+        puts "-r username level        :shortcut to start the Quiz (username: your username, level: 1, 2 or 3 only)"
+        puts "-info                    :to view history of the app and developer information"
         exit
     when '-info'
         puts "This terminal application namely 'Mad Math Quiz' is written by Kim Stocker in December - 2021 for CoderAcademy Full-stack Developer Course - Term 1 assignment"

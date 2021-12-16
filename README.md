@@ -2,9 +2,39 @@
 # GitHub Link
 [GitHub Repo](https://github.com/kimbstocker/KimStocker_T1A3)
 ## Help Guide
-- steps to install the application
-- any dependencies required by the application to operate
-- any system/hardware requirements
+This application require Ruby version 3.0.3 to run. To check if your computer have Ruby (or version of your Ruby), puts in your terminal
+```
+ruby --version
+```
+If you do not have Ruby 3.0.3 version, run this line '$ brew install ruby' on your terminal to install the latest version of Ruby.
+Visit https://www.ruby-lang.org/en/documentation/installation/ for more info on how to install Ruby on your device
+To have the best experience with this App, please also install Ruby Gems 'colorize' and 'terminal-table'
+You could run a script file below to automatically install all Gems and dependencies. 
+Navigate to the route folder of the application, folder name "KimStocker_T1A3", in your terminal puts the below command to check the script
+```
+cat src/script/install-dependencies.sh
+```
+and to run the script put
+```
+sh src/script/install-dependencies.sh
+```
+Once everything is set up, you can use the below script to start the program
+```
+sh src/script/start-quiz.sh
+```
+Another way to start the program is to Navigate to 'KimStocker_T1A3/src' folder and run
+```
+ruby main.rb
+```
+For help menu, in 'KimStocker_T1A3/src' folder run
+```
+ruby main.rb -help
+```
+The programm requires you to enter your username and Quiz difficulty level (1,2 or 3) before you can start answering any questions. A shortcut to start the Quiz is to use the below script and command line arguments. Kindly change (username to your username, level to 1, 2 or 3 only)
+```
+sh src/script/start-quiz.sh username level
+```
+
 # Software Development Plan
 ## Purpose
 In recent years, devices such as computers, phones, calculators etc. have done extremely well at taking over the role of processing and solving mathematical problems for humans. However, learning and understanding math is still evidently an important skill for our everyday life. Mathematics, particularly mental arithmetic operations calculations are also known to help increase the human’s brain capacity. Daily brain exercises such as learning a new language, playing Sudoku, playing Chess etc. are also proven to reduce the risk of having alzheimer's disease. This Math Quiz App is developed with the hope to help engaging kids as well as adults in practicing and challenging themselves at mental arithmetic operations (except division). And as a result, improving their intelligence and brain's capacity. 
