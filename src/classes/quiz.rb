@@ -1,3 +1,4 @@
+require 'json'
 require 'colorize'
 require 'terminal-table'
 require_relative './error-handling.rb'
@@ -7,7 +8,11 @@ $operators = ["+", "-", "*"]
 $single_digit_numbers = (1..9).to_a
 $double_digit_numbers = (10..99).to_a
 $triple_digit_numbers = (100..999).to_a
-$leader_board = {}
+
+# Try to read from the file and store what is read in the global varialbe to get the ALL time leaderboard(Should be called something else not Leaderboard
+
+file = File.read('leaderboard/leaderboard.json')
+$leader_board = JSON.parse(file)
 
 class Quiz
 
@@ -113,9 +118,7 @@ class Quiz
         if [@@username, @@total_score] == $leader_board.max_by {|k, v| v}
             puts "Congratulations #{@@username}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
-        File.open("./leaderboard/leaderboard.txt", "w+") do |f| 
-            f.puts($leader_board)
-        end 
+        File.write("./leaderboard/leaderboard.json", JSON.dump($leader_board))
         puts $leader_board
     end
     
