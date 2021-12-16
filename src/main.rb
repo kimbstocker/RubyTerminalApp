@@ -35,11 +35,13 @@ while true
         puts "(once continue, you will need to complete all 10 quiz questions before you could see quit option again)"
         user_choice = gets.chomp
         if user_choice == "q"
-                puts "Thank you and goodbye!"
+                puts "Thank you for playing! See you again soon :)!"
                 exit
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
                 quiz = Quiz.new(username, user_choice)
                 quiz.run_quiz
+                new_high_score = UpdateScoreboard.new
+                new_high_score.update_score
         else
             raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
         end

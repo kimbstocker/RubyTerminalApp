@@ -9,10 +9,8 @@ $single_digit_numbers = (1..9).to_a
 $double_digit_numbers = (10..99).to_a
 $triple_digit_numbers = (100..999).to_a
 
-# Try to read from the file and store what is read in the global varialbe to get the ALL time leaderboard(Should be called something else not Leaderboard
-
-file = File.read('leaderboard/leaderboard.json')
-$leader_board = JSON.parse(file)
+file = File.read('scoreboard/scoreboard.json')
+$score_board = JSON.parse(file)
 
 class Quiz
 
@@ -35,7 +33,6 @@ class Quiz
         ask_questions
         create_scorecard
         display_scorecard
-        update_leaderboard
         save_scorecard
     end
 
@@ -110,17 +107,11 @@ class Quiz
             random_nick_name = nick_name.shuffle
             puts "#{@@username}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
         end
-        
-    end
-
-    def update_leaderboard
-        $leader_board[@@username] = @@total_score
-        if [@@username, @@total_score] == $leader_board.max_by {|k, v| v}
+        if [@@username, @@total_score] == $score_board.max_by {|k, v| v}
             puts "Congratulations #{@@username}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
-        File.write("./leaderboard/leaderboard.json", JSON.dump($leader_board))
-        puts $leader_board
     end
+
     
     def save_scorecard
         @score_to_save << ["", "", "", "Total Score", @@total_score]
@@ -157,6 +148,22 @@ class Quiz
             retry 
         end
     end 
+
+end
+
+
+class UpdateScoreboard < Quiz
+
+    def initialize
+    end
+
+    def update_score
+        # update scoreboard if userame is new or username total score is higher than history scores.
+        if $score_board[@@username] == nil || $score_board[@@username] < @@total_score
+            $score_board[@@username] = @@total_score
+        end
+        File.write("./scoreboard/scoreboard.json", JSON.dump($score_board))
+    end
 
 end
 
