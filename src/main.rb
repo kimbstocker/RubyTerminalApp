@@ -31,10 +31,10 @@ end
 
 while true
     begin
-        puts "Welcome to Mad Math Quiz! Let's get started with a username, enter anything and it will be your username for this application!"
+        puts "Welcome to Mad Math Quiz! Let's get started with a username, enter anything and it will be your username for this application!".magenta
         username = gets.chomp.downcase
-        puts "Please enter 1 for easy, 2 for medium, 3 for hard level, 'q' to quit!"
-        puts "(You can also enter 'q' to quit at anytime during the Quiz!)"
+        puts "Please enter 1 for easy, 2 for medium, 3 for hard level, 'q' to quit!".magenta
+        puts "(You can also enter 'q' to quit at anytime during the Quiz!)".magenta
         user_choice = gets.chomp
         if user_choice == "q"
             exit_message
@@ -44,7 +44,7 @@ while true
             
             quiz = Quiz.new(username, user_choice, scoreboard)
             quiz.run_quiz
-            
+
             scoreboard.update_score(username, quiz.total_score)
             scoreboard.write_file
         else
@@ -52,7 +52,7 @@ while true
         end
 
     rescue ValidationError => e
-        puts e.message 
+        puts e.message.red 
         retry 
     end
 end

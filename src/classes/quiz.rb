@@ -150,17 +150,17 @@ class Quiz
         @save_table.align_column(3, :right)
         @save_table.align_column(4, :right)
         begin
-            puts "Would you like to save your scorecard? (Please enter 'yes' to save file, 'no' to start another quiz, or 'q' to quit.)"
+            puts "Would you like to save your scorecard? (Please enter 'yes' to save file, 'no' to start another quiz, or 'q' to quit.)".magenta
             input = gets.chomp
             case input 
                 when 'yes'
-                    puts "What do you want to name your file?"
+                    puts "What do you want to name your file?".magenta
                     file_name = gets.chomp
                     File.open("./scorecards/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
                         f.puts(@save_table)
                     end 
-                    puts "Your scorecard has been saved and here is the file path ./scorecards/#{file_name} - #{Time.now.utc}.txt"
-                    puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)"
+                    puts "Your scorecard has been saved and here is the file path ./scorecards/#{file_name} - #{Time.now.utc}.txt".magenta
+                    puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)".magenta
                     continue = gets.chomp
                     if continue == 'no'
                     exit_message
@@ -170,7 +170,7 @@ class Quiz
                 when 'q'
                     exit_message
                 else
-                    raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***")
+                    raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***").red
 
             end
         rescue ValidationError => e
