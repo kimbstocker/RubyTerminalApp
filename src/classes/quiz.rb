@@ -135,10 +135,10 @@ class Quiz
         if @total_score == 10
             nick_name = ["genius", "mastermind", "math master", "mad math", "you're gifted", "superstar"]
             random_nick_name = nick_name.shuffle
-            puts "#{@username.capitalize}, #{random_nick_name[0]}! You got a perfect score!".white.on_blue.blink
+            puts "#{@username.capitalize}, #{random_nick_name[0]}! You got a perfect score!".light_white.on_blue.blink
         end
         if @total_score >= @scoreboard.max_score
-            puts "Congratulations #{@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
+            puts "Congratulations #{@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:light_blue).on_light_white.underline     
         end
     end
 
@@ -170,11 +170,11 @@ class Quiz
                 when 'q'
                     exit_message
                 else
-                    raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***").red
+                    raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***")
 
             end
         rescue ValidationError => e
-            puts e.message 
+            puts e.message.red
             retry 
         end
     end
