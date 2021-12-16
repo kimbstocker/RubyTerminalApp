@@ -16,28 +16,27 @@ class Scoreboard
 
     def initialize(filename)
         @filename = filename
-        @scores = {}
+        @all_user_scores = {}
     end
     
     def read_file
         file = File.read(@filename)
-        @scores = JSON.parse(file)
+        @all_user_scores = JSON.parse(file)
     end
 
     def max_score
-        top = @scores.max_by {|k, v| v}
-        top[1]
+        @all_user_scores.values.max || 0
     end
 
     def update_score(username, score)
         # update scoreboard if username is new or username total score is higher than history scores.
-        if @scores[username] == nil || @scores[username] < score
-            @scores[username] = score
+        if @all_user_scores[username] == nil || @all_user_scores[username] < score
+            @all_user_scores[username] = score
         end
     end
 
     def write_file
-        File.write(@filename, JSON.dump(@scores))
+        File.write(@filename, JSON.dump(@all_user_scores))
     end
 end
 
