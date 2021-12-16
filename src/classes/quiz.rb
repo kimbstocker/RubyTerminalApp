@@ -2,6 +2,7 @@ require 'json'
 require 'colorize'
 require 'terminal-table'
 require_relative './error-handling.rb'
+require_relative '../methods.rb'
 
 
 $operators = ["+", "-", "*"]
@@ -33,7 +34,6 @@ class Quiz
         ask_questions
         create_scorecard
         display_scorecard
-        save_scorecard
     end
 
     def ask_questions
@@ -105,10 +105,10 @@ class Quiz
         if @@total_score == 10
             nick_name = ["Genius", "Mastermind", "Math Master", "Mad Math", "You're gifted", "Superstar"]
             random_nick_name = nick_name.shuffle
-            puts "#{@@username}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
+            puts "#{@@username.capitalize}, #{random_nick_name[0]}! you got a perfect score!".white.on_blue.blink
         end
         if [@@username, @@total_score] == $score_board.max_by {|k, v| v}
-            puts "Congratulations #{@@username}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
+            puts "Congratulations #{@@username.capitalize}! You are currently on top of the leaderboard! Great work!".colorize(:magenta).on_light_white.underline     
         end
     end
 
@@ -126,19 +126,23 @@ class Quiz
                 when 'yes'
                     puts "What do you want to name your file?"
                     file_name = gets.chomp
-                    File.open("./scorecard/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
+                    File.open("./scorecards/#{file_name} - #{Time.now.utc}.txt", "w+") do |f| 
                         f.puts(@save_table)
                     end 
-                    puts "Your scorecard has been saved and here is the file path ./scorecard/#{file_name} - #{Time.now.utc}.txt"
+                    puts "Your scorecard has been saved and here is the file path ./scorecards/#{file_name} - #{Time.now.utc}.txt"
                     puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)"
                     continue = gets.chomp
                     if continue == 'no'
-                        exit
+                        # puts 'Thank you! See you another time!'
+                        # exit
+                    exit_message
                     end
                 when 'no'
                     return true
                 when 'q'
-                    exit
+                    # puts 'Thank you! See you tomorrow!'
+                    # exit
+                    exit_message
                 else
                     raise ValidationError.new("*** Please enter 'yes', 'no', or 'q' only ***")
 

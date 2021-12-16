@@ -1,6 +1,8 @@
 require 'colorize'
 require_relative './classes/quiz.rb'
 require_relative './classes/error-handling.rb'
+require_relative './methods.rb'
+
 
 if ARGV.length > 0 
     flag, *rest = ARGV 
@@ -30,18 +32,18 @@ end
 while true
     begin
         puts "Welcome to Mad Math Quiz! Let's get started with a username, enter anything and it will be your username for this application!"
-        username = gets.chomp
+        username = gets.chomp.downcase
         puts "Please enter 1 for easy, 2 for medium, 3 for hard level, q to quit!"
         puts "(once continue, you will need to complete all 10 quiz questions before you could see quit option again)"
         user_choice = gets.chomp
         if user_choice == "q"
-                puts "Thank you for playing! See you again soon :)!"
-                exit
+            exit_message
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
                 quiz = Quiz.new(username, user_choice)
                 quiz.run_quiz
                 new_high_score = UpdateScoreboard.new
                 new_high_score.update_score
+                quiz.save_scorecard
         else
             raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
         end
