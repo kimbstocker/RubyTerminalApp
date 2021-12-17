@@ -82,18 +82,7 @@ Users are offered with unlimited quizzes with 3 difficulty levels
 ### Feature 3: Saving Scorecard
 Once finished their quiz, users can print out their scorecard that list out all 10 questions, the correct answers, their answers and their scores for each questions as well as their overall score.
 ## Control Flow Diagram
-- show the workflow/logic and/or integration of the features in your application for each feature.
-- utilise a recognised format or set of conventions for a control flow diagram, such as UML.
-
-
-
-
-
-
-
-
-
-
+  ![Control Flow Diagram](docs/KimStocker_T1A3_Control_Flow_Diagram.png "Diagram")
 ## Software Developement Plan and Implementation
 - outlines how each feature will be implemented and a checklist of tasks for each feature. Please see more Trello screenshots in docs/Trello Screenshots folder to see the movements of the features items from one column to another.
   ![Trello Board](docs/TrelloHome.png "TrelloBoard")
