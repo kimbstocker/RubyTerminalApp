@@ -84,14 +84,22 @@ Once finished their quiz, users can print out their scorecard that list out all 
 ## Control Flow Diagram
 - show the workflow/logic and/or integration of the features in your application for each feature.
 - utilise a recognised format or set of conventions for a control flow diagram, such as UML.
+
+
+
+
+
+
+
+
+
+
 ## Software Developement Plan and Implementation
-- outlines how each feature will be implemented and a checklist of tasks for each feature
+- outlines how each feature will be implemented and a checklist of tasks for each feature. Please see more Trello screenshots in docs/Trello Screenshots folder to see the movements of the features items from one column to another.
   ![Trello Board](docs/TrelloHome.png "TrelloBoard")
   ![Trello Difficulty Level Feature](docs/TrelloDifficultyLevel.png "DifficultyLevelFeature")
   ![Trello The Quiz Feature](docs/TrelloTheQuiz.png "TheQuizFeature")
   ![Trello Printing Scorecard Feature](docs/TrelloPrintingScorecard.png "PrintingScorecardFeature")
-- prioritise the implementation of different features, or checklist items within a feature
-- provide a deadline, duration or other time indicator for each feature or checklist/checklist-item
--  Your checklists for each feature should have at least 5 items.
+
   
 

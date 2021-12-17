@@ -1,0 +1,7 @@
+
+Scoreboard
+  should update the score of an existing user if new score is higher than history one
+
+Finished in 0.00292 seconds (files took 0.1979 seconds to load)
+1 example, 0 failures
+

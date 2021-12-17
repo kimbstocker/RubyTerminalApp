@@ -13,13 +13,15 @@ describe 'Scoreboard' do
     end
 
 
-    # it 'should write to scoreboard file when an user finish the Quiz' do
-    #     scoreboard = Scoreboard.new(../scoreboard/test_scoreboard.json)
-    #     scoreboard.write_file
-    #     expect(JSON.parse(../scoreboard/test_scoreboard.json)).to eq(scoreboard.scores)
-    
-    
-    # end
+    it 'should provide the max score' do
+        scoreboard = Scoreboard.new('dummyfilepath')
+        scoreboard.update_score("josh", 2)
+        scoreboard.max_score
+        expect(scoreboard.max_score).to eq(2)
+        scoreboard.update_score("kim", 5)
+        expect(scoreboard.max_score).to eq(5)
 
+
+    end
 
 end

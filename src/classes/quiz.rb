@@ -86,10 +86,7 @@ class Quiz
                     random_numbers = [single_digit_num_one, double_digit_num_one, double_digit_num_two, triple_digit_num].shuffle
                     question = "#{random_numbers[0]} #{first_operator} #{random_numbers[1]} #{second_operator} #{random_numbers[2]} #{third_operator} #{random_numbers[3]}"
             end
-
             answer = eval(question)
-            @questions << question
-            @correct_answers << answer
             puts question
             input = gets.chomp
             if input == 'q'
@@ -100,6 +97,8 @@ class Quiz
                 puts "Wrong".red
             end
             @user_answers << input.to_i
+            @questions << question
+            @correct_answers << answer
         end
        
     end
