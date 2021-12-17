@@ -64,8 +64,7 @@ while true
             scoreboard.write_file
         end
         
-    rescue ValidationError => e
-        puts e.message.red 
+    rescue 
         retry 
     end
 end

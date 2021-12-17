@@ -59,8 +59,10 @@ All usernames and scores will be stored (for the life of the program) for progre
 
 **User Interface & User Experience:**
 
-- Once user execute the program, they will be invited to enter their username.
-- The user will see the first question of the quiz once they choose the difficulty level (easy, medium or hard from the menu options)
+- Once user execute the program, the user will see a disclaimer, and menu options to choose the level of difficulty or quit options.
+- Once user chose their difficulty levels, they will be invited to enter their username.
+- If the username chosen has already been taken, they will be need to choose a different name. This process keep repeating until the username is unique to the system.
+- Once the user enter an unique username, they will see the first question of the quiz.
 - The user will then need to enter their answer.
 - Once answer is entered, the user will see if their answer is *right* or *wrong* as well as the next question of the quiz. 
 - This process will be repeated for a total of 10 questions. (User have the option to Quit at any time of the Quiz by simply enter 'q')
@@ -86,10 +88,10 @@ There are 3 scoreboard, respective to the 3 levels, that stores all username and
   ![Control Flow Diagram](docs/KimStocker_T1A3_Control_Flow_Diagram.png "Diagram")
 ## Software Developement Plan and Implementation
 - outlines how each feature will be implemented and a checklist of tasks for each feature. Please see more Trello screenshots in docs/Trello Screenshots folder to see the movements of the features items from one column to another.
-  ![Trello Board](docs/TrelloHome.png "TrelloBoard")
-  ![Trello Difficulty Level Feature](docs/TrelloDifficultyLevel.png "DifficultyLevelFeature")
-  ![Trello The Quiz Feature](docs/TrelloTheQuiz.png "TheQuizFeature")
-  ![Trello Printing Scorecard Feature](docs/TrelloPrintingScorecard.png "PrintingScorecardFeature")
+  ![Trello Board](docs/Trello_Screenshots/TrelloHome.png "TrelloBoard")
+  ![Trello Difficulty Level Feature](docs/Trello_Screenshots/TrelloDifficultyLevel.png "DifficultyLevelFeature")
+  ![Trello The Quiz Feature](docs/Trello_Screenshots/TrelloTheQuiz.png "TheQuizFeature")
+  ![Trello Printing Scorecard Feature](docs/Trello_Screenshots/TrelloPrintingScorecard.png "PrintingScorecardFeature")
 
   
 

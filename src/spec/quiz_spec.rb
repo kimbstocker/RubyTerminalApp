@@ -19,7 +19,6 @@ describe 'Scoreboard' do
         scoreboard.max_score
         expect(scoreboard.max_score).to eq(2)
         scoreboard.update_score("kim", 5)
-        scoreboard.max_score
         expect(scoreboard.max_score).to eq(5)
 
 
