@@ -32,9 +32,14 @@ end
 while true
     begin
         puts "Welcome to Mad Math Quiz! Let's get started with a username, enter anything and it will be your username for this application!".magenta
+        puts "                     *** Disclaimer ***".red
+        puts "Your score will be stored in the system at the end of the Quiz.".red
+        puts "User a nickname or quit at anytime if you dont want your details to be stored".red
+        puts "                     *** Disclaimer ***".red
         username = gets.chomp.downcase
         puts "Please enter 1 for easy, 2 for medium, 3 for hard level, 'q' to quit!".magenta
         puts "(You can also enter 'q' to quit at anytime during the Quiz!)".magenta
+        
         user_choice = gets.chomp
         if user_choice == "q"
             exit_message
