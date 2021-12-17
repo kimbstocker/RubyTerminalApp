@@ -12,7 +12,7 @@ TRIPLE_DIGIT_NUMBERS = (100..999).to_a
 
 class Scoreboard
 
-    attr_accessor :scores
+    attr_accessor :all_user_scores
 
     def initialize(filename)
         @filename = filename

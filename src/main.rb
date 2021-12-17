@@ -1,4 +1,5 @@
 require 'colorize'
+require "tty-prompt"
 require_relative './classes/quiz.rb'
 require_relative './classes/error-handling.rb'
 require_relative './methods.rb'
@@ -35,15 +36,16 @@ while true
         puts "                     *** Disclaimer ***".red
         puts "Your score will be stored in the system at the end of the Quiz.".red
         puts "User a nickname or quit at anytime if you dont want your details to be stored".red
+        puts "You can enter 'q' to quit at anytime during the Quiz!".red
         puts "                     *** Disclaimer ***".red
         username = gets.chomp.downcase
-        puts "Please enter 1 for easy, 2 for medium, 3 for hard level, 'q' to quit!".magenta
-        puts "(You can also enter 'q' to quit at anytime during the Quiz!)".magenta
-        
-        user_choice = gets.chomp
+        prompt = TTY::Prompt.new
+        level_choices = {Easy: "1", Medium: "2", Hard: "3", Quit: "q"}
+        user_choice = prompt.select("Please choose your difficulty level?", level_choices)
         if user_choice == "q"
             exit_message
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
+            puts "*** Welcome to Mad Math Quiz - Level: #{user_choice} - Username: #{username.capitalize} ***".light_blue
             scoreboard = Scoreboard.new("scoreboard/scoreboard.json")
             scoreboard.read_file
             
@@ -52,10 +54,8 @@ while true
 
             scoreboard.update_score(username, quiz.total_score)
             scoreboard.write_file
-        else
-            raise ValidationError.new("*** Please enter 1, 2, 3 or q only ***")
         end
-
+        
     rescue ValidationError => e
         puts e.message.red 
         retry 
