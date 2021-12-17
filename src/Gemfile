@@ -13,3 +13,5 @@ gem "terminal-table"
 gem "pry-byebug", "~> 3.4"
 
 gem "brakeman", "~> 3.3", ">= 3.3.2"
+
+gem 'tty-prompt', '~> 0.23.1'
