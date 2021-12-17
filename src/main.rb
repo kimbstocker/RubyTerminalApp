@@ -46,7 +46,7 @@ while true
             exit_message
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
             puts "*** Welcome to Mad Math Quiz - Level: #{user_choice} - Username: #{username.capitalize} ***".light_blue
-            scoreboard = Scoreboard.new("scoreboard/scoreboard.json")
+            scoreboard = Scoreboard.new("scoreboard/scoreboard#{user_choice}.json")
             scoreboard.read_file
             
             quiz = Quiz.new(username, user_choice, scoreboard)
