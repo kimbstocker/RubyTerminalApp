@@ -87,7 +87,26 @@ There are 3 scoreboard, respective to the 3 levels, that stores all username and
 ## Control Flow Diagram
   ![Control Flow Diagram](docs/KimStocker_T1A3_Control_Flow_Diagram.png "Diagram")
 ## Software Developement Plan and Implementation
-- outlines how each feature will be implemented and a checklist of tasks for each feature. Please see more Trello screenshots in docs/Trello Screenshots folder to see the movements of the features items from one column to another.
+### Planning 
+- Project Documentation requirements
+- Code requirements
+- Idea >> Trello Board with minimum MVP features & checklists, good to have features and deadlines.
+- Github Repo & folder set up
+### Development
+- Start with the core MVP features/functions and prioritised list items that due first.
+- Code the program from the Quiz feature and then expand to the other features
+- Test/Refactor
+- Error handling.
+- Update Trello board.
+- Automatic Test with Rspec
+- Refactor
+- Manual & Rspec test again
+### Deployment
+- Packaging/prepare script to help & guide user to install the application.
+- Update portfolio website
+- Create a blog post on how it was developed.
+
+Please see more Trello screenshots in docs/Trello Screenshots folder to see the movements of the features items from one column to another.
   ![Trello Board](docs/Trello_Screenshots/TrelloHome.png "TrelloBoard")
   ![Trello Difficulty Level Feature](docs/Trello_Screenshots/TrelloDifficultyLevel.png "DifficultyLevelFeature")
   ![Trello The Quiz Feature](docs/Trello_Screenshots/TrelloTheQuiz.png "TheQuizFeature")
