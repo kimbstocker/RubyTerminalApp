@@ -32,23 +32,31 @@ end
 
 while true
     begin
-        puts "Welcome to Mad Math Quiz! Let's get started with a username, enter anything and it will be your username for this application!".magenta
         puts "                     *** Disclaimer ***".red
         puts "Your score will be stored in the system at the end of the Quiz.".red
         puts "User a nickname or quit at anytime if you dont want your details to be stored".red
         puts "You can enter 'q' to quit at anytime during the Quiz!".red
         puts "                     *** Disclaimer ***".red
-        username = gets.chomp.downcase
         prompt = TTY::Prompt.new
         level_choices = {Easy: "1", Medium: "2", Hard: "3", Quit: "q"}
-        user_choice = prompt.select("Please choose your difficulty level?", level_choices)
+        user_choice = prompt.select("Welcome to Mad Math Quiz! Please choose your difficulty level?", level_choices)
         if user_choice == "q"
             exit_message
         elsif user_choice == "1" || user_choice == "2" || user_choice == "3"
-            puts "*** Welcome to Mad Math Quiz - Level: #{user_choice} - Username: #{username.capitalize} ***".light_blue
             scoreboard = Scoreboard.new("scoreboard/scoreboard#{user_choice}.json")
             scoreboard.read_file
-            
+            begin puts "Let's get started with a username, enter anything and it will be your username for this application!".magenta
+                username = gets.chomp.downcase
+                scoreboard.all_user_scores.each do |k,v|
+                    if "#{k}" == username
+                        raise ValidationError.new("This username has already been taken, please chooose another one.")
+                    end
+                end
+            rescue ValidationError => e
+                puts e.message.red 
+                retry 
+            end
+            puts "*** Welcome to Mad Math Quiz - Level: #{user_choice} - Username: #{username.capitalize} ***".light_blue
             quiz = Quiz.new(username, user_choice, scoreboard)
             quiz.run_quiz
 
