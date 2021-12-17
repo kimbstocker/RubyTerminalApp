@@ -60,7 +60,7 @@ All usernames and scores will be stored (for the life of the program) for progre
 **User Interface & User Experience:**
 
 - Once user execute the program, they will be invited to enter their username.
-- The user will see the first question of the quiz once they choose the difficulty level (1,2 or 3)
+- The user will see the first question of the quiz once they choose the difficulty level (easy, medium or hard from the menu options)
 - The user will then need to enter their answer.
 - Once answer is entered, the user will see if their answer is *right* or *wrong* as well as the next question of the quiz. 
 - This process will be repeated for a total of 10 questions. (User have the option to Quit at any time of the Quiz by simply enter 'q')
@@ -79,8 +79,9 @@ Users are offered with unlimited quizzes with 3 difficulty levels
 - Easy: each question in this level will be randomly generated from 2 arithmetic operators (either +, -, *), 2 single digit numbers and 1 double digit number. 
 - Medium: this level include random questions with 2 arithmetic operators (either +, -, *), 1 single digit number and 2 double digit numbers.
 - Hard: each question in this level will contain 3 arithmetic operators (either +,-,* or **), 1 single digit number, 2 double digit numbers and 1 triple digit number.
-### Feature 3: Saving Scorecard
-Once finished their quiz, users can print out their scorecard that list out all 10 questions, the correct answers, their answers and their scores for each questions as well as their overall score.
+### Feature 3: Displaying and Saving Scorecard
+Once finished their quiz, users can see their scorecard in a table format. The table includes all 10 questions, the correct answers, their answers and their scores for each questions as well as their overall score.
+There are 3 scoreboard, respective to the 3 levels, that stores all username and their scores. If the username is new to the system, the username and score will be stored in a scoreboard, according to the level the user chose to play at the beginning of the game. If the user has already played the game before and hit a new highscore, their new high score will be stored.
 ## Control Flow Diagram
   ![Control Flow Diagram](docs/KimStocker_T1A3_Control_Flow_Diagram.png "Diagram")
 ## Software Developement Plan and Implementation
