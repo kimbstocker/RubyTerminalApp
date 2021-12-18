@@ -23,7 +23,7 @@ cat src/script/install-dependencies.sh
 ```
 and to run the script put
 ```
-src/script/install-dependencies.sh
+cd src && script/install-dependencies.sh
 ```
 Once everything is set up, you can use the below script to start the program
 ```
@@ -31,7 +31,7 @@ src/script/start-quiz.sh
 ```
 Another way to start the program is to Navigate to 'KimStocker_T1A3/src' folder and run
 ```
-bundle exec ruby main.rb
+cd src && bundle exec ruby main.rb
 ```
 For help menu, in 'KimStocker_T1A3/src' folder run
 ```
