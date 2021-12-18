@@ -1,3 +1,3 @@
 #!/bin/bash
 cd src
-ruby main.rb
+bundle exec ruby main.rb

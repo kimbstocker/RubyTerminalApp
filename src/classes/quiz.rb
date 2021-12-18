@@ -61,7 +61,6 @@ class Quiz
         ask_questions
         create_scorecard
         display_scorecard
-        save_scorecard
     end
 
     def ask_questions
@@ -159,10 +158,10 @@ class Quiz
                         f.puts(@save_table)
                     end 
                     puts "Your scorecard has been saved and here is the file path ./scorecards/#{file_name} - #{Time.now.utc}.txt".magenta
-                    puts "Would you like to start another Quiz?(Enter anything to continue, 'no' to exit)".magenta
+                    puts "Would you like to start another Quiz? (Enter anything to continue, 'no' to exit)".magenta
                     continue = gets.chomp
                     if continue == 'no'
-                    exit_message
+                        exit_message
                     end
                 when 'no'
                     return true

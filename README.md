@@ -31,17 +31,11 @@ src/script/start-quiz.sh
 ```
 Another way to start the program is to Navigate to 'KimStocker_T1A3/src' folder and run
 ```
-ruby main.rb
+bundle exec ruby main.rb
 ```
 For help menu, in 'KimStocker_T1A3/src' folder run
 ```
-ruby main.rb -help
-```
-The programm requires you to enter your username and Quiz difficulty level (1,2 or 3) before you can start answering any questions. 
-
-A shortcut to start the Quiz is to use the below script and command line arguments. Kindly change 'username' to your username, 'level' to 1, 2 or 3 only.
-```
-src/script/start-quiz.sh username level
+bundle exec ruby main.rb -help
 ```
 # Software Development Plan
 ## Purpose
@@ -61,8 +55,8 @@ All usernames and scores will be stored (for the life of the program) for progre
 
 - Once user execute the program, the user will see a disclaimer, and menu options to choose the level of difficulty or quit options.
 - Once user chose their difficulty levels, they will be invited to enter their username.
-- If the username chosen has already been taken, they will be need to choose a different name. This process keep repeating until the username is unique to the system.
-- Once the user enter an unique username, they will see the first question of the quiz.
+- If the username chosen has already been taken, they can continue if that was their username or they will be need to choose a different name.
+- Once the user decided on the username, they will see the first question of the quiz.
 - The user will then need to enter their answer.
 - Once answer is entered, the user will see if their answer is *right* or *wrong* as well as the next question of the quiz. 
 - This process will be repeated for a total of 10 questions. (User have the option to Quit at any time of the Quiz by simply enter 'q')
